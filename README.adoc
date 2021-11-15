@@ -1,6 +1,6 @@
-= 28 Days Native
+= 28 Days Native App
 
-A React Native app (iOS & Android) which tracks & visualizes cycle data.
+Privacy-First Cycle Tracking App (React Native, iOS/Android).
 
 == Development
 
