@@ -34,4 +34,4 @@ or
 yarn android
 ----
 
-&copy; Rahel Lüthy 2021
+&copy; Rahel Lüthy 2021 – link:LICENSE[MIT License]
