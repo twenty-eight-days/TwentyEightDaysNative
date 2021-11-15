@@ -34,4 +34,15 @@ or
 yarn android
 ----
 
+=== Quality Assurance
+
+==== On Commit
+On every commit, changes are auto-formatted via https://prettier.io[Prettier].
+If ESLint reports any errors, the commit is rejected.
+
+To force a commit in defiance of these rules, use `git commit --no-verify`.
+
+==== On Push
+On every push, GitHub CI compiles all code and runs all test.
+
 &copy; Rahel Lüthy 2021 – link:LICENSE[MIT License]
