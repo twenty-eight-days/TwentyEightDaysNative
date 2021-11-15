@@ -1,0 +1,37 @@
+= 28 Days Native
+
+A React Native app (iOS & Android) which tracks & visualizes cycle data.
+
+== Development
+
+=== Project Setup
+
+Based on a vanilla (*no* Expo) setup, initialized via https://github.com/react-native-community/react-native-template-typescript[react-native-template-typescript].
+
+=== Installing Dependencies
+
+Run the following commands after cloning this repo (first-time only):
+
+----
+yarn install
+cd ios
+pod install
+----
+
+=== Development
+
+Pre-Requisites: OS-specific simulators (see https://reactnative.dev/docs/environment-setup[React Native Docs] for instructions).
+
+To run the app on the simulator:
+
+----
+yarn ios
+----
+
+or
+
+----
+yarn android
+----
+
+&copy; Rahel Lüthy 2021
