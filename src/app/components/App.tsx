@@ -8,8 +8,9 @@
  * @format
  */
 
-import React from 'react'
-import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, useColorScheme, View } from 'react-native'
+import React, { useState } from 'react'
+import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, useColorScheme, View, Button } from 'react-native'
+import DatePicker from 'react-native-date-picker'
 
 import {
   Colors,
@@ -26,6 +27,7 @@ const Section: React.FC<{
   const isDarkMode = useColorScheme() === 'dark'
   return (
     <View style={styles.sectionContainer}>
+      <Datepicker />
       <Text
         style={[
           styles.sectionTitle,
@@ -50,6 +52,30 @@ const Section: React.FC<{
   )
 }
 
+export const Datepicker = () => {
+  const [date, setDate] = useState(new Date())
+  const [open, setOpen] = useState(false)
+
+  return (
+    <View>
+      <Button title="Open" onPress={() => setOpen(true)} />
+      <DatePicker
+        modal
+        mode={'date'}
+        locale={'de'}
+        open={open}
+        date={date}
+        onConfirm={date => {
+          setOpen(false)
+          setDate(date)
+        }}
+        onCancel={() => {
+          setOpen(false)
+        }}
+      />
+    </View>
+  )
+}
 export const App = () => {
   const isDarkMode = useColorScheme() === 'dark'
 
