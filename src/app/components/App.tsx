@@ -20,7 +20,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen'
 import { ExampleButton } from '../../example'
-
+//
 const Section: React.FC<{
   title: string
 }> = ({ children, title }) => {
