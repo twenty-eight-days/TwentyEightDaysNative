@@ -12,6 +12,8 @@ target 'TwentyEightDaysNative' do
     :hermes_enabled => false
   )
 
+  pod 'react-native-sensitive-info', :path => '../node_modules/react-native-sensitive-info'
+
   target 'TwentyEightDaysNativeTests' do
     inherit! :complete
     # Pods for testing
