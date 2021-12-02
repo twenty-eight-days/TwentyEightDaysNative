@@ -47,7 +47,7 @@ export const Datepicker = () => {
         <View>
             <Button title="Open" onPress={() => setOpen(true)} />
             <DatePicker
-                modal
+                modal={false}
                 mode={'date'}
                 locale={'de'}
                 open={open}
