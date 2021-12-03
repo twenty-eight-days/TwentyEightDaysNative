@@ -16,7 +16,8 @@
     "react-native": "0.66.3",
     "react-native-date-picker": "^4.1.2",
     "react-native-eject": "^0.1.2",
-    "react-redux": "^7.2.6"
+    "react-redux": "^7.2.6",
+    "tailwind-react-native-classnames": "^1.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

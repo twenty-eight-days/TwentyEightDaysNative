@@ -8,34 +8,37 @@ import {
     View,
 } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import tailwind from 'tailwind-react-native-classnames';
 
 export const App = () => {
-  const [days, setDays] = useState(0);
+  const [days, setDays] = useState(12);
   return (
     <SafeAreaView>
       <StatusBar />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={{display: 'flex', flexDirection: 'column'}}>
-        <View style={{backgroundColor: '#d282d7', padding: 10}}>
-          <Text style={{fontSize: 30, color: '#FFFFFF'}}>TwenyEightDays</Text>
+      <View
+        style={tailwind.style('flex flex-col')}>
+        <View style={tailwind.style('p-4 bg-pink-600')}>
+          <Text style={tailwind.style('text-4xl text-white')}>TwenyEightDays</Text>
         </View>
-        <View style={{alignItems: 'center'}}>
-          <Text style={{marginTop: 200, fontSize: 50}}>{days} days</Text>
+        <View style={tailwind.style(' my-20')}>
+          <Text style={tailwind.style('text-4xl text-black m-auto font-black')}>{days} days</Text>
         </View>
-        <TouchableHighlight
-          style={{
-            backgroundColor: '#d282d7',
-            margin: 10,
-            padding: 10,
-            alignItems: 'center',
-            borderRadius: 10,
-          }}
-          onPress={() => setDays(days + 1)}>
-          <Text style={{color: 'white'}}>Today</Text>
-        </TouchableHighlight>
-        <Datepicker />
-      </ScrollView>
+        <View style={tailwind.style('flex flex-row m-10')}>
+            <TouchableHighlight
+                style={tailwind.style('bg-pink-600 rounded text-white w-40 p-4 mr-auto')}
+                onPress={() => setDays(days + 1)}>
+                <Text style={tailwind.style('mx-auto text-white')}>Today</Text>
+            </TouchableHighlight>
+            <Datepicker />
+        </View>
+        <ScrollView style={tailwind.style('m-10')}>
+            <Text style={tailwind.style('text-2xl font-black text-black')}>Recordings</Text>
+            <Text style={tailwind.style('text-xl font-black text-black')}>01.12.2021 🩸</Text>
+            <Text style={tailwind.style('text-xl font-black text-black')}>01.11.2021 🩸</Text>
+            <Text style={tailwind.style('text-xl font-black text-black')}>01.10.2021 🩸</Text>
+            <Text style={tailwind.style('text-xl font-black text-black')}>01.09.2021 🩸</Text>
+        </ScrollView>
+      </View>
     </SafeAreaView>
   );
 };
@@ -52,17 +55,10 @@ export const Datepicker = () => {
     };
 
     return (
-        <View>
+        <View style={tailwind.style('bg-pink-600 rounded p-4 ml-auto w-40')}>
             <TouchableHighlight
-                style={{
-                    backgroundColor: '#d282d7',
-                    margin: 10,
-                    padding: 10,
-                    alignItems: 'center',
-                    borderRadius: 10,
-                }}
                 onPress={showDatepicker}>
-                <Text style={{color: 'white'}}>Date Picker</Text>
+                <Text style={tailwind.style('mx-auto  text-white')}>Date Picker</Text>
             </TouchableHighlight>
             {show && (
                 <DateTimePicker
