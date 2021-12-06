@@ -1,3 +1,3 @@
-import {MainScreen} from './view/containers/MainScreen';
+import {Screen} from './view/containers/Screen';
 
-export const App = MainScreen
+export const App = Screen
