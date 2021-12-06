@@ -1,9 +1,9 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { useDispatch, useSelector } from 'react-redux'
-import { counterReducer  } from './exampleSlice'
+import { counterReducer } from './exampleSlice'
 
 export const rootReducer = combineReducers({
-  example: counterReducer ,
+  example: counterReducer,
 })
 
 export type RootState = ReturnType<typeof rootReducer>

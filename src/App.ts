@@ -1,3 +1,3 @@
-import {Screen} from './view/containers/Screen';
+import { Screen } from './view/containers/Screen'
 
 export const App = Screen
