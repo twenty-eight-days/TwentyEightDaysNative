@@ -62,5 +62,3 @@ export const storage: Storage = {
   write: pushAsyncPeriod,
   delete: removeDate,
 }
-
-console.log(storage.read())

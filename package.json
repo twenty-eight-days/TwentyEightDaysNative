@@ -24,6 +24,7 @@
     "react-native-eject": "^0.1.2",
     "react-native-encrypted-storage": "^4.0.2",
     "react-native-svg": "^12.1.1",
+    "react-native-testing-library": "^6.0.0",
     "react-redux": "^7.2.6",
     "tailwind-react-native-classnames": "^1.5.1"
   },

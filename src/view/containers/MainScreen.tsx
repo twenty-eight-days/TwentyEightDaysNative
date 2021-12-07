@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Text, View } from 'react-native'
+import { Period, storage } from '../../model/storage'
 import tailwind from 'tailwind-react-native-classnames'
 import { Datepicker } from '../components/datePicker'
 import { ButtonImg } from '../components/buttons'
-import { Period, storage } from '../../model/storage'
 import { Table } from '../components/table'
 
 export const MainScreen = () => {
