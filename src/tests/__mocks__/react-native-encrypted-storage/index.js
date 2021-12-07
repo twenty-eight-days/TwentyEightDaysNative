@@ -2,7 +2,7 @@
 
 const RNEncryptedStorage = {
   setItem: jest.fn(() => Promise.resolve()),
-  getItem: jest.fn(() => Promise.resolve('{ "foo": 1 }')),
+  getItem: jest.fn(() => Promise.resolve(JSON.stringify([{ date: new Date(1638879766) }]))),
   removeItem: jest.fn(() => Promise.resolve()),
   clear: jest.fn(() => Promise.resolve()),
 }
