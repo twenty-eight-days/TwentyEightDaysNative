@@ -25,3 +25,8 @@ test('test storage write', () => {
     expect(typeof periods).toBe('object')
   })
 })
+test('test delete Item', () => {
+  return storage.delete({ date: new Date() }).then(periods => {
+    expect(typeof periods).toBe('object')
+  })
+})
