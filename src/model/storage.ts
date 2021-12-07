@@ -5,7 +5,7 @@ export interface Storage {
   write: (period: Period) => Promise<Period[]>
 }
 
-interface Period {
+export interface Period {
   date: Date
 }
 
