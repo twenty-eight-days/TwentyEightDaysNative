@@ -5,10 +5,10 @@ import { Datepicker } from '../components/datePicker'
 import { ButtonImg } from '../components/buttons'
 
 export const MainScreen = () => {
-  const [days, setDays] = useState(12)
+  const [days, setDays] = useState(5)
   const [dates, setDates] = useState<Date[]>([])
   const nextPeriod = new Date()
-  nextPeriod.setDate(nextPeriod.getDate() + 28 - days)
+  nextPeriod.setDate(nextPeriod.getDate())
   return (
     <View style={tailwind.style('flex flex-col my-auto')}>
       <View style={tailwind.style('')}>
@@ -30,7 +30,16 @@ export const MainScreen = () => {
           text={'Today'}
           src={require('../ressources/white_today.png')}
         />
-        <Datepicker dates={dates} setDates={setDates} />
+        <Datepicker
+          onPress={(event, date) => {
+            if (date !== undefined) {
+              if (date) {
+                dates.push(date)
+              }
+              setDates(dates)
+            }
+          }}
+        />
       </View>
     </View>
   )
