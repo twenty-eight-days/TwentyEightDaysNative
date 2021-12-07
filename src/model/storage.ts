@@ -23,7 +23,14 @@ async function getAsyncPeriod() {
     await EncryptedStorage.setItem('period', '[]').catch((error: Error) => console.log(error))
     return [] as Period[]
   } else {
-    return JSON.parse(periodStorage) as Period[]
+    let periods = JSON.parse(periodStorage) as Period[]
+    for (const period of periods) {
+      period.date = new Date(period.date)
+    }
+    periods.sort(function (a, b) {
+      return b.date.getUTCDate() - a.date.getUTCDate()
+    })
+    return periods
   }
 }
 
