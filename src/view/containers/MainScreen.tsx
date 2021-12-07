@@ -12,7 +12,7 @@ export const MainScreen = () => {
   const nextPeriod = new Date()
   nextPeriod.setDate(nextPeriod.getDate())
   useEffect(() => {
-    storage.read().then(periods => setPeriods(periods))
+    storage.read().then(p => setPeriods(p))
   }, [])
   return (
     <View style={tailwind.style('flex flex-col my-auto mx-10')}>
@@ -24,7 +24,7 @@ export const MainScreen = () => {
       <View style={tailwind.style('flex flex-row  my-5')}>
         <ButtonImg
           onPress={() => {
-            storage.write({ date: new Date() }).then(() => storage.read().then(periods => setPeriods(periods)))
+            storage.write({ date: new Date() }).then(() => storage.read().then(p => setPeriods(p)))
           }}
           text={'Today'}
           src={require('../ressources/white_today.png')}
@@ -32,7 +32,7 @@ export const MainScreen = () => {
         <Datepicker
           onPress={(event, date) => {
             if (date !== undefined) {
-              storage.write({ date: date }).then(() => storage.read().then(periods => setPeriods(periods)))
+              storage.write({ date: date }).then(() => storage.read().then(p => setPeriods(p)))
             }
           }}
         />
