@@ -4,15 +4,15 @@ import { Period, storage } from '../../model/storage'
 import tailwind from 'tailwind-react-native-classnames'
 import { Datepicker } from '../components/datePicker'
 import { ButtonImg } from '../components/buttons'
-import { Table } from '../components/table'
+import { PeriodTable } from '../components/periodTable'
 
 export const MainScreen = () => {
   const [days] = useState(99)
-  const [dates, setDates] = useState<Period[]>([])
+  const [periods, setPeriods] = useState<Period[]>([])
   const nextPeriod = new Date()
   nextPeriod.setDate(nextPeriod.getDate())
   useEffect(() => {
-    storage.read().then(periods => setDates(periods))
+    storage.read().then(periods => setPeriods(periods))
   }, [])
   return (
     <View style={tailwind.style('flex flex-col my-auto mx-10')}>
@@ -24,7 +24,7 @@ export const MainScreen = () => {
       <View style={tailwind.style('flex flex-row  my-5')}>
         <ButtonImg
           onPress={() => {
-            storage.write({ date: new Date() }).then(() => storage.read().then(periods => setDates(periods)))
+            storage.write({ date: new Date() }).then(() => storage.read().then(periods => setPeriods(periods)))
           }}
           text={'Today'}
           src={require('../ressources/white_today.png')}
@@ -32,16 +32,12 @@ export const MainScreen = () => {
         <Datepicker
           onPress={(event, date) => {
             if (date !== undefined) {
-              storage.write({ date: date }).then(() => storage.read().then(periods => setDates(periods)))
+              storage.write({ date: date }).then(() => storage.read().then(periods => setPeriods(periods)))
             }
           }}
         />
       </View>
-      <Table
-        table={dates.map(period => {
-          return period.date.toDateString()
-        })}
-      />
+      <PeriodTable periods={periods} setPeriods={setPeriods} />
     </View>
   )
 }
