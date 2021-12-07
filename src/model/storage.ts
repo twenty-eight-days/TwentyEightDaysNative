@@ -10,9 +10,20 @@ export interface Period {
   date: Date
 }
 
-async function pushAsyncPeriod(period: Period) {
+async function pushAsyncPeriod(newPeriod: Period) {
   const periods = await getAsyncPeriod()
-  periods.push(period)
+  for (let period of periods) {
+    const date = period.date
+    const newDate = newPeriod.date
+    if (
+      date.getDate() === newDate.getDate() &&
+      date.getMonth() === newDate.getMonth() &&
+      date.getFullYear() === newDate.getFullYear()
+    ) {
+      return periods
+    }
+  }
+  periods.push(newPeriod)
   await EncryptedStorage.setItem('period', JSON.stringify(periods)).catch((error: Error) => console.log(error))
   return periods
 }

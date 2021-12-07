@@ -7,7 +7,7 @@ import { Period, storage } from '../../model/storage'
 import { Table } from '../components/table'
 
 export const MainScreen = () => {
-  const [days, setDays] = useState(99)
+  const [days] = useState(99)
   const [dates, setDates] = useState<Period[]>([])
   const nextPeriod = new Date()
   nextPeriod.setDate(nextPeriod.getDate())
@@ -24,11 +24,7 @@ export const MainScreen = () => {
       <View style={tailwind.style('flex flex-row  my-5')}>
         <ButtonImg
           onPress={() => {
-            if (days + 1 < 28) {
-              setDays(1)
-            } else {
-              setDays(0)
-            }
+            storage.write({ date: new Date() }).then(() => storage.read().then(periods => setDates(periods)))
           }}
           text={'Today'}
           src={require('../ressources/white_today.png')}
