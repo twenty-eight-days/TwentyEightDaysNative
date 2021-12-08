@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, TouchableHighlight, View } from 'react-native'
+import { Text, TouchableHighlight, View, Alert } from 'react-native'
 import { Period, storage } from '../../model/storage'
 import tailwind from 'tailwind-react-native-classnames'
 
@@ -10,7 +10,17 @@ export const PeriodTable = (props: { periods: Period[]; setPeriods: (periods: Pe
         <TouchableHighlight
           key={index}
           style={tailwind.style('py-2')}
-          onPress={() => storage.delete(item).then(period => props.setPeriods(period))}
+          onPress={() =>
+            Alert.alert('DELETE', 'Are you sure, you want delete ?!?', [
+              { text: 'cancel' },
+              {
+                text: 'ok',
+                onPress: () => {
+                  storage.delete(item).then(p => props.setPeriods(p))
+                },
+              },
+            ])
+          }
         >
           <Text>{item.date.toDateString()}</Text>
         </TouchableHighlight>
