@@ -5,10 +5,10 @@ import tailwind from 'tailwind-react-native-classnames'
 import { Datepicker } from '../components/datePicker'
 import { ButtonImg } from '../components/buttons'
 import { PeriodTable } from '../components/periodTable'
+import { currentDuration } from '../../controller/calculate'
 
 export const MainScreen = () => {
-  const [days] = useState(99)
-  const [periods, setPeriods] = useState<Period[]>([])
+  const [periods, setPeriods] = useState<Period[]>([{ date: new Date() }])
   const nextPeriod = new Date()
   nextPeriod.setDate(nextPeriod.getDate())
   useEffect(() => {
@@ -19,7 +19,9 @@ export const MainScreen = () => {
       <View style={tailwind.style('')}>
         <Text style={tailwind.style('text-4xl mx-auto')}>🩸</Text>
         <Text style={tailwind.style('text-xl text-black m-auto font-black')}>{nextPeriod.toDateString()}</Text>
-        <Text style={tailwind.style('text-4xl text-black m-auto font-black')}>{days} days</Text>
+        <Text style={tailwind.style('text-4xl text-black m-auto font-black')}>
+          {currentDuration(periods.length !== 0 ? periods[0].date : new Date())}
+        </Text>
       </View>
       <View style={tailwind.style('flex flex-row  my-5')}>
         <ButtonImg

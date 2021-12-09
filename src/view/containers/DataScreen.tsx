@@ -15,7 +15,9 @@ export const DataScreen = () => {
     <View style={tailwind.style('flex flex-col p-10')}>
       <Text style={tailwind.style('m-auto text-2xl my-auto')}>DATA SCREEN</Text>
       <Text style={tailwind.style('text-2xl')}>Cycle durations:</Text>
-      {cycleDuration(periods).map((duration)=>{return <Text>{duration} days</Text>})}
+      {cycleDuration(periods).map(duration => {
+        return <Text>{duration} days</Text>
+      })}
     </View>
   )
 }

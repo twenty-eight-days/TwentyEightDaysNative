@@ -13,8 +13,8 @@ export const Datepicker = (props: { onPress: (event: Event, d: Date | undefined)
         <DateTimePicker
           testID="datePicker"
           value={date}
-          is24Hour={true}
           display="default"
+          maximumDate={new Date()}
           onChange={(event: Event, d: Date | undefined) => {
             props.onPress(event, d)
             setShow(false)

@@ -39,7 +39,7 @@ async function getAsyncPeriod() {
       period.date = new Date(period.date)
     }
     periods.sort(function (a, b) {
-      return b.date.getUTCDate() - a.date.getUTCDate()
+      return a.date.getUTCDate() - b.date.getUTCDate()
     })
     return periods
   }

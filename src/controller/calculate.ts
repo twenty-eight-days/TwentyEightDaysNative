@@ -1,8 +1,11 @@
 import { Period } from '../model/storage'
-
+export function currentDuration(date: Date) {
+  const day = (new Date().getTime() - date.getTime()) / (1000 * 60 * 60 * 24)
+  return Math.round(day)
+}
 export function cycleDuration(periods: Period[]) {
   if (periods.length < 2) {
-    return undefined
+    return []
   }
   const cycleDurations = []
   for (let i = 1; i < periods.length; i++) {
