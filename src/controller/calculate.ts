@@ -14,3 +14,20 @@ export function cycleDuration(periods: Period[]) {
   }
   return cycleDurations
 }
+export function averageDuration(periods: Period[]) {
+  let duration: number[] = cycleDuration(periods)
+  let sum = 0
+  for (let i = 0; i < duration.length; i++) {
+    sum += duration[i]
+  }
+  return sum / duration.length
+}
+export function varianceDuration(periods: Period[]) {
+  let duration: number[] = cycleDuration(periods)
+  let average: number = averageDuration(periods)
+  let variance: number = 0
+  for (let item of duration) {
+    variance += (item - average) * (item - average)
+  }
+  return variance / (duration.length - 1)
+}

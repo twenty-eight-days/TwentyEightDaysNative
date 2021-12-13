@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Text, View } from 'react-native'
 import tailwind from 'tailwind-react-native-classnames'
 import { Period, storage } from '../../model/storage'
-import { cycleDuration } from '../../controller/calculate'
+import { averageDuration, cycleDuration, varianceDuration } from '../../controller/calculate'
 
 export const DataScreen = () => {
   const [periods, setPeriods] = useState<Period[]>([])
@@ -18,6 +18,8 @@ export const DataScreen = () => {
       {cycleDuration(periods).map(duration => {
         return <Text>{duration} days</Text>
       })}
+      <Text style={tailwind.style('text-2xl')}>Average: {averageDuration(periods)}</Text>
+      <Text style={tailwind.style('text-2xl')}>Variance: {varianceDuration(periods)}</Text>
     </View>
   )
 }
