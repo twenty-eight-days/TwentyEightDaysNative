@@ -39,7 +39,7 @@ async function getAsyncPeriod() {
       period.date = new Date(period.date)
     }
     periods.sort(function (a, b) {
-      return a.date.getTime() - b.date.getTime()
+      return b.date.getTime() - a.date.getTime()
     })
     return periods
   }
