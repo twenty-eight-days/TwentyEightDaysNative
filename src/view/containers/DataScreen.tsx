@@ -17,16 +17,37 @@ export const DataScreen = () => {
   }, [])
   return (
     <View style={tailwind.style('flex flex-col p-10')}>
-      <Text style={tailwind.style('text-xl')}>Cycle durations:</Text>
-      {cycleDuration(periods).map(duration => {
-        return <Text>{duration} days</Text>
-      })}
-      <Text style={tailwind.style('text-xl')}>
-        Average: {averageDuration(periods)}
-      </Text>
-      <Text style={tailwind.style('text-xl')}>
-        Standard deviation: {deviationDuration(periods)}
-      </Text>
+      <Statistic
+        title={'Cycle Duration:'}
+        data={cycleDuration(periods).map((duration, index) => {
+          return (
+            <Text key={index} style={tailwind.style('ml-auto')}>
+              {duration} days
+            </Text>
+          )
+        })}
+      />
+      <Statistic title={'Average:'} data={averageDuration(periods)} />
+      <Statistic
+        title={'Standard Deviation:'}
+        data={deviationDuration(periods)}
+      />
+    </View>
+  )
+}
+function Statistic(props: { title: string; data: number | JSX.Element[] }) {
+  const dataJSX: { [key: string]: JSX.Element } = {
+    number: <Text style={tailwind.style('ml-auto my-auto')}>{props.data}</Text>,
+    object: (
+      <View style={tailwind.style('flex flex-col ml-auto my-auto')}>
+        {props.data}
+      </View>
+    ),
+  }
+  return (
+    <View style={tailwind.style('flex flex-row my-4')}>
+      <Text style={tailwind.style('text-xl')}>{props.title}</Text>
+      {dataJSX[typeof props.data]}
     </View>
   )
 }
