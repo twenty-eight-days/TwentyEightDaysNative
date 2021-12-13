@@ -1,11 +1,14 @@
 //__mocks__/react-native-encrypted-storage/index.js
 import { Period } from '../../../model/storage'
 
-const mockPeriodStorage: Period[] = [{ date: new Date() }]
+let mockPeriodStorage: Period[] = [
+    { date: new Date(2021, 1, 1) },
+    { date: new Date(2021, 1, 11)}
+]
 const RNEncryptedStorage = {
   setItem: jest.fn(() =>
     Promise.resolve((string: string) => {
-      mockPeriodStorage.push(JSON.parse(string) as Period)
+      mockPeriodStorage = JSON.parse(string) as Period[]
       return mockPeriodStorage
     })
   ),

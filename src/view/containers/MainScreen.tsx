@@ -18,7 +18,9 @@ export const MainScreen = () => {
     <View style={tailwind.style('flex flex-col my-auto mx-10')}>
       <View style={tailwind.style('')}>
         <Text style={tailwind.style('text-4xl mx-auto')}>🩸</Text>
-        <Text style={tailwind.style('text-xl text-black m-auto font-black')}>{nextPeriod.toDateString()}</Text>
+        <Text style={tailwind.style('text-xl text-black m-auto font-black')}>
+          {nextPeriod.toDateString()}
+        </Text>
         <Text style={tailwind.style('text-4xl text-black m-auto font-black')}>
           {currentDuration(periods.length !== 0 ? periods[0].date : new Date())}
         </Text>
@@ -26,7 +28,9 @@ export const MainScreen = () => {
       <View style={tailwind.style('flex flex-row  my-5')}>
         <ButtonImg
           onPress={() => {
-            storage.write({ date: new Date() }).then(() => storage.read().then(p => setPeriods(p)))
+            storage
+              .write({ date: new Date() })
+              .then(() => storage.read().then(p => setPeriods(p)))
           }}
           text={'Today'}
           src={require('../ressources/white_today.png')}
@@ -34,7 +38,9 @@ export const MainScreen = () => {
         <Datepicker
           onPress={(event, date) => {
             if (date !== undefined) {
-              storage.write({ date: date }).then(() => storage.read().then(p => setPeriods(p)))
+              storage
+                .write({ date: date })
+                .then(() => storage.read().then(p => setPeriods(p)))
             }
           }}
         />

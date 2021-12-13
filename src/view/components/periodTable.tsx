@@ -3,7 +3,10 @@ import { Text, TouchableHighlight, View, Alert } from 'react-native'
 import { Period, storage } from '../../model/storage'
 import tailwind from 'tailwind-react-native-classnames'
 
-export const PeriodTable = (props: { periods: Period[]; setPeriods: (periods: Period[]) => void }) => {
+export const PeriodTable = (props: {
+  periods: Period[]
+  setPeriods: (periods: Period[]) => void
+}) => {
   return (
     <View style={tailwind.style('flex flex-col')}>
       {props.periods.map((item, index) => (

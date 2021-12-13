@@ -3,7 +3,9 @@ import { View } from 'react-native'
 import DateTimePicker, { Event } from '@react-native-community/datetimepicker'
 import { Button } from './buttons'
 
-export const Datepicker = (props: { onPress: (event: Event, d: Date | undefined) => void }) => {
+export const Datepicker = (props: {
+  onPress: (event: Event, d: Date | undefined) => void
+}) => {
   const [date] = useState(new Date())
   const [show, setShow] = useState(false)
   return (
