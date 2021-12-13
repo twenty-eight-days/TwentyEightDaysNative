@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { View } from 'react-native'
 import DateTimePicker, { Event } from '@react-native-community/datetimepicker'
 import { Button } from './buttons'
+import tailwind from 'tailwind-react-native-classnames'
 
 export const Datepicker = (props: {
   onPress: (event: Event, d: Date | undefined) => void
@@ -9,7 +10,7 @@ export const Datepicker = (props: {
   const [date] = useState(new Date())
   const [show, setShow] = useState(false)
   return (
-    <View>
+    <View style={tailwind.style('w-32')}>
       <Button onPress={() => setShow(true)} text={'Date'} />
       {show && (
         <DateTimePicker

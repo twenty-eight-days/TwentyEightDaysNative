@@ -17,15 +17,14 @@ export const DataScreen = () => {
   }, [])
   return (
     <View style={tailwind.style('flex flex-col p-10')}>
-      <Text style={tailwind.style('m-auto text-2xl my-auto')}>DATA SCREEN</Text>
-      <Text style={tailwind.style('text-2xl')}>Cycle durations:</Text>
+      <Text style={tailwind.style('text-xl')}>Cycle durations:</Text>
       {cycleDuration(periods).map(duration => {
         return <Text>{duration} days</Text>
       })}
-      <Text style={tailwind.style('text-2xl')}>
+      <Text style={tailwind.style('text-xl')}>
         Average: {averageDuration(periods)}
       </Text>
-      <Text style={tailwind.style('text-2xl')}>
+      <Text style={tailwind.style('text-xl')}>
         Standard deviation: {deviationDuration(periods)}
       </Text>
     </View>

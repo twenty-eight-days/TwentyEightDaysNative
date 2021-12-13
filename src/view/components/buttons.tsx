@@ -9,7 +9,7 @@ export const ButtonImg = (props: {
 }) => {
   return (
     <TouchableHighlight
-      style={tailwind.style('bg-pink-600 rounded text-white w-40 p-2 mr-auto')}
+      style={tailwind.style('bg-pink-600 rounded text-white w-32 p-2 mr-auto')}
       onPress={props.onPress}
     >
       <View style={tailwind.style('flex flex-row')}>
@@ -32,7 +32,7 @@ export const ButtonNav = (props: {
 }) => {
   return (
     <TouchableHighlight
-      style={tailwind.style('w-40 p-2 m-auto rounded')}
+      style={tailwind.style('w-32 p-2 m-auto rounded')}
       onPress={props.onPress}
     >
       <View style={tailwind.style('flex flex-col')}>
@@ -51,7 +51,7 @@ export const ButtonNav = (props: {
 export const Button = (props: { onPress: (f: any) => void; text: string }) => {
   return (
     <TouchableHighlight
-      style={tailwind.style('bg-pink-600 rounded text-white w-40 p-2 mr-auto')}
+      style={tailwind.style('bg-pink-600 rounded text-white w-32 p-2 mr-auto')}
       onPress={props.onPress}
     >
       <View style={tailwind.style('flex flex-row')}>

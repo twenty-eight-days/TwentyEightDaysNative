@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, TouchableHighlight, View, Alert } from 'react-native'
+import { Text, TouchableHighlight, Alert, ScrollView } from 'react-native'
 import { Period, storage } from '../../model/storage'
 import tailwind from 'tailwind-react-native-classnames'
 
@@ -8,7 +8,7 @@ export const PeriodTable = (props: {
   setPeriods: (periods: Period[]) => void
 }) => {
   return (
-    <View style={tailwind.style('flex flex-col')}>
+    <ScrollView style={tailwind.style('flex flex-col')}>
       {props.periods.map((item, index) => (
         <TouchableHighlight
           key={index}
@@ -28,6 +28,6 @@ export const PeriodTable = (props: {
           <Text>{item.date.toDateString()}</Text>
         </TouchableHighlight>
       ))}
-    </View>
+    </ScrollView>
   )
 }
