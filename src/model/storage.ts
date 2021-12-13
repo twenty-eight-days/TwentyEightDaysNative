@@ -61,6 +61,10 @@ async function removeDate(periodToDelete: Period) {
   return await getAsyncPeriod()
 }
 
+export async function deleteAll() {
+  await EncryptedStorage.setItem('period', JSON.stringify([]))
+}
+
 export const storage: Storage = {
   read: getAsyncPeriod,
   write: pushAsyncPeriod,
