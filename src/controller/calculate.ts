@@ -20,7 +20,7 @@ export function averageDuration(periods: Period[]) {
   for (let i = 0; i < duration.length; i++) {
     sum += duration[i]
   }
-  return sum / duration.length
+  return Math.round(sum / duration.length)
 }
 export function deviationDuration(periods: Period[]) {
   let duration: number[] = cycleDuration(periods)
