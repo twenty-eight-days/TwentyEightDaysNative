@@ -4,9 +4,10 @@ export function currentDuration(d: Date) {
   const day = (new Date().getTime() - d.getTime()) / (1000 * 60 * 60 * 24)
   return Math.round(day)
 }
-export function expectedDate(d: Date) {
-  d.setDate(d.getDate() + 28)
-  return d
+export function expectedDate(date: Date) {
+  const expected = new Date()
+  expected.setDate(date.getDate() + 28)
+  return expected
 }
 export function cycleDuration(periods: Period[]) {
   if (periods.length < 2) {
