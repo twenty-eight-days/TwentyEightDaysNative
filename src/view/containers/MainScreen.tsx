@@ -5,21 +5,21 @@ import tailwind from 'tailwind-react-native-classnames'
 import { Datepicker } from '../components/datePicker'
 import { ButtonImg } from '../components/buttons'
 import { PeriodTable } from '../components/periodTable'
-import { currentDuration } from '../../controller/calculate'
+import { currentDuration, expectedDate } from '../../controller/calculate'
 
 export const MainScreen = () => {
   const [periods, setPeriods] = useState<Period[]>([{ date: new Date() }])
-  const nextPeriod = new Date()
-  nextPeriod.setDate(nextPeriod.getDate())
   useEffect(() => {
     storage.read().then(p => setPeriods(p))
   }, [])
   return (
     <View style={tailwind.style('flex flex-col my-auto mx-10')}>
       <View style={tailwind.style('')}>
-        <Text style={tailwind.style('text-4xl mx-auto')}>🩸</Text>
+        <Text style={tailwind.style('text-4xl mx-auto')}>💧</Text>
         <Text style={tailwind.style('text-xl text-black m-auto font-black')}>
-          {nextPeriod.toDateString()}
+          {expectedDate(
+            periods.length !== 0 ? periods[0].date : new Date()
+          ).toDateString()}
         </Text>
         <Text style={tailwind.style('text-4xl text-black m-auto font-black')}>
           {currentDuration(periods.length !== 0 ? periods[0].date : new Date())}
@@ -45,7 +45,9 @@ export const MainScreen = () => {
           }}
         />
       </View>
-      <PeriodTable periods={periods} setPeriods={setPeriods} />
+      <View style={tailwind.style('h-1/3')}>
+        <PeriodTable periods={periods} setPeriods={setPeriods} />
+      </View>
     </View>
   )
 }
