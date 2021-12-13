@@ -22,12 +22,12 @@ export function averageDuration(periods: Period[]) {
   }
   return sum / duration.length
 }
-export function varianceDuration(periods: Period[]) {
+export function deviationDuration(periods: Period[]) {
   let duration: number[] = cycleDuration(periods)
   let average: number = averageDuration(periods)
-  let variance: number = 0
+  let deviation: number = 0
   for (let item of duration) {
-    variance += (item - average) * (item - average)
+    deviation += (item - average) * (item - average)
   }
-  return variance / (duration.length - 1)
+  return Math.round(Math.sqrt(deviation / (duration.length - 1)))
 }
