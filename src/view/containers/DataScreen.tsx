@@ -2,11 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Text, View } from 'react-native'
 import tailwind from 'tailwind-react-native-classnames'
 import { Period, storage } from '../../model/storage'
-import {
-  averageDuration,
-  cycleDuration,
-  deviationDuration,
-} from '../../controller/calculate'
+import { averageDuration, deviationDuration } from '../../controller/calculate'
 //import { Button } from '../components/buttons'
 
 export const DataScreen = () => {
@@ -17,20 +13,10 @@ export const DataScreen = () => {
     storage.read().then(p => setPeriods(p))
   }, [])
   return (
-    <View style={tailwind.style('flex flex-col p-10')}>
+    <View style={tailwind.style('flex flex-row flex-wrap p-10')}>
+      <Statistic title={'Average'} data={averageDuration(periods)} />
       <Statistic
-        title={'Cycle Duration:'}
-        data={cycleDuration(periods).map((duration, index) => {
-          return (
-            <Text key={index} style={tailwind.style('ml-auto')}>
-              {duration} days
-            </Text>
-          )
-        })}
-      />
-      <Statistic title={'Average:'} data={averageDuration(periods)} />
-      <Statistic
-        title={'Standard Deviation:'}
+        title={'Standard Deviation'}
         data={deviationDuration(periods)}
       />
     </View>
@@ -38,17 +24,25 @@ export const DataScreen = () => {
 }
 function Statistic(props: { title: string; data: number | JSX.Element[] }) {
   const dataJSX: { [key: string]: JSX.Element } = {
-    number: <Text style={tailwind.style('ml-auto my-auto')}>{props.data}</Text>,
-    object: (
-      <View style={tailwind.style('flex flex-col ml-auto my-auto')}>
-        {props.data}
+    number: (
+      <View style={tailwind.style('m-auto')}>
+        <Text style={tailwind.style(' text-4xl text-white')}>{props.data}</Text>
+        <Text style={tailwind.style(' text-sm text-white m-auto')}>days</Text>
       </View>
     ),
   }
   return (
-    <View style={tailwind.style('flex flex-row my-4')}>
-      <Text style={tailwind.style('text-xl')}>{props.title}</Text>
-      {dataJSX[typeof props.data]}
+    <View style={tailwind.style('flex flex-col my-4 mx-auto')}>
+      <Text style={tailwind.style('text-xl text-black font-black m-auto')}>
+        {props.title}
+      </Text>
+      <View
+        style={tailwind.style(
+          'm-auto mt-4 shadow-lg rounded-full p-4 h-28 w-28 bg-yellow-500'
+        )}
+      >
+        {dataJSX[typeof props.data]}
+      </View>
     </View>
   )
 }
