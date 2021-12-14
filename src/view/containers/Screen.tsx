@@ -11,7 +11,7 @@ export const Screen = () => {
   const [main, setMain] = useState(<MainScreen />)
   return (
     <Provider store={store}>
-      <SafeAreaView style={tailwind.style('text-black h-full')}>
+      <SafeAreaView style={tailwind.style('text-black h-full bg-pink-50')}>
         <StatusBar />
         <Header />
         {main}

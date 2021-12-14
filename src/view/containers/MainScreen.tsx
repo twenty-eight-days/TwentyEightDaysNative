@@ -21,7 +21,9 @@ export const MainScreen = () => {
     <View style={tailwind.style('flex flex-col mx-10 my-10')}>
       <View style={tailwind.style('flex flex-row flex-wrap')}>
         <Text style={tailwind.style('text-xl text-black')}>Expected</Text>
-        <Text style={tailwind.style('text-xl text-black ml-auto font-black')}>
+        <Text
+          style={tailwind.style('text-xl text-pink-700 ml-auto font-black')}
+        >
           {expectedDate(
             periods.length !== 0 ? periods[0].date : new Date()
           ).toDateString()}
@@ -29,7 +31,9 @@ export const MainScreen = () => {
         <Text style={tailwind.style('text-xl text-black')}>
           Current cycle day
         </Text>
-        <Text style={tailwind.style('text-4xl text-black ml-auto font-black')}>
+        <Text
+          style={tailwind.style('text-4xl text-pink-700 ml-auto font-black')}
+        >
           {currentDuration(periods.length !== 0 ? periods[0].date : new Date())}
         </Text>
       </View>
