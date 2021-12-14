@@ -1,11 +1,12 @@
 import React from 'react'
 import { Text, TouchableHighlight, Alert, ScrollView } from 'react-native'
-import { Period, storage } from '../../model/storage'
 import tailwind from 'tailwind-react-native-classnames'
+import { write } from '../../controller/redux'
+import { Period, storage } from '../../model/storage'
 
 export const PeriodTable = (props: {
   periods: Period[]
-  setPeriods: (periods: Period[]) => void
+  dispatch: (f: any) => void
 }) => {
   return (
     <ScrollView style={tailwind.style('flex flex-col')}>
@@ -19,7 +20,9 @@ export const PeriodTable = (props: {
               {
                 text: 'ok',
                 onPress: () => {
-                  storage.delete(item).then(p => props.setPeriods(p))
+                  storage
+                    .delete(item)
+                    .then(periods => props.dispatch(write(periods)))
                 },
               },
             ])

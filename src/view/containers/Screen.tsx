@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import { MainScreen } from './MainScreen'
 import { Provider } from 'react-redux'
-import { store } from '../../model'
-import tailwind from 'tailwind-react-native-classnames'
 import { SafeAreaView, StatusBar } from 'react-native'
-import { Header } from './Header'
+import { MainScreen } from './MainScreen'
+import tailwind from 'tailwind-react-native-classnames'
 import { Footer } from './Footer'
+import { Header } from './Header'
+import { store } from '../../controller/redux'
 
 export const Screen = () => {
   const [main, setMain] = useState(<MainScreen />)
