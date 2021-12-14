@@ -7,6 +7,7 @@ import {
   cycleDuration,
   deviationDuration,
 } from '../../controller/calculate'
+//import { Button } from '../components/buttons'
 
 export const DataScreen = () => {
   const [periods, setPeriods] = useState<Period[]>([])

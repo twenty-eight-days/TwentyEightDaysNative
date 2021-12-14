@@ -6,6 +6,7 @@ import { Datepicker } from '../components/datePicker'
 import { ButtonImg } from '../components/buttons'
 import { PeriodTable } from '../components/periodTable'
 import { currentDuration, expectedDate } from '../../controller/calculate'
+import { exportJson } from '../../controller/share'
 
 export const MainScreen = () => {
   const [periods, setPeriods] = useState<Period[]>([{ date: new Date() }])
@@ -13,7 +14,7 @@ export const MainScreen = () => {
     storage.read().then(p => setPeriods(p))
   }, [])
   return (
-    <View style={tailwind.style('flex flex-col my-auto mx-10')}>
+    <View style={tailwind.style('flex flex-col m-10')}>
       <View style={tailwind.style('')}>
         <Text style={tailwind.style('text-4xl mx-auto')}>💧</Text>
         <Text style={tailwind.style('text-xl text-black m-auto font-black')}>
@@ -45,8 +46,15 @@ export const MainScreen = () => {
           }}
         />
       </View>
-      <View style={tailwind.style('h-1/3')}>
+      <View style={tailwind.style('h-1/2')}>
         <PeriodTable periods={periods} setPeriods={setPeriods} />
+        <View style={tailwind.style('my-4')}>
+          <ButtonImg
+            onPress={() => exportJson(periods)}
+            text={'Share'}
+            src={require('../ressources/share.png')}
+          />
+        </View>
       </View>
     </View>
   )
