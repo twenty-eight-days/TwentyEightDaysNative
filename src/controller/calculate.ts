@@ -37,5 +37,10 @@ export function deviationDuration(periods: Period[]) {
   for (let item of duration) {
     deviation += (item - average) * (item - average)
   }
-  return Math.round(Math.sqrt(deviation / (duration.length - 1)))
+  deviation = Math.round(Math.sqrt(deviation / (duration.length - 1)))
+  if (isNaN(deviation)) {
+    return 0
+  } else {
+    return deviation
+  }
 }

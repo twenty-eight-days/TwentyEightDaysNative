@@ -15,12 +15,20 @@ import { Datepicker } from '../view/components/datePicker'
 import { PeriodTable } from '../view/components/periodTable'
 import { DataScreen } from '../view/containers/DataScreen'
 import { Footer } from '../view/containers/Footer'
+import { store } from '../controller/redux'
+import { Provider } from 'react-redux'
 
 test('smoketest', async () => {
   await waitFor(() => render(<App />))
 })
 test('test Data Screen', async () => {
-  await waitFor(() => render(<DataScreen />))
+  await waitFor(() =>
+    render(
+      <Provider store={store}>
+        <DataScreen />
+      </Provider>
+    )
+  )
 })
 test('test Footer', async () => {
   const setMain = function () {}
@@ -57,9 +65,10 @@ test('test Period Table', async () => {
     { date: new Date(2021, 1, 5) },
     { date: new Date(2021, 1, 1) },
   ]
-  const { getByText } = await waitFor(() =>
-    render(<PeriodTable periods={periods} setPeriods={() => {}} />)
-  )
+  const { getByText } = await waitFor(() => {
+    const dispatch = store.dispatch
+    return render(<PeriodTable periods={periods} dispatch={dispatch} />)
+  })
   const periodItem = getByText('Mon Feb 01 2021')
   fireEvent.press(periodItem)
 })

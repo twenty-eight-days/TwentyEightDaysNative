@@ -8,7 +8,7 @@ import { SettingsScreen } from './SettingsScreen'
 
 export const Footer = (props: { setMain: (main: JSX.Element) => void }) => {
   return (
-    <View style={tailwind.style('flex flex-row mt-auto')}>
+    <View style={tailwind.style('flex flex-row mt-auto bg-pink-50 z-20')}>
       <ButtonNav
         onPress={() => {
           props.setMain(<MainScreen />)

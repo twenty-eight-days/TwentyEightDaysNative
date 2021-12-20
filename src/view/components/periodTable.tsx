@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, TouchableHighlight, Alert, ScrollView } from 'react-native'
+import { Text, TouchableHighlight, Alert, Image, View } from 'react-native'
 import tailwind from 'tailwind-react-native-classnames'
 import { write } from '../../controller/redux'
 import { Period, storage } from '../../model/storage'
@@ -9,7 +9,7 @@ export const PeriodTable = (props: {
   dispatch: (f: any) => void
 }) => {
   return (
-    <ScrollView style={tailwind.style('flex flex-col')}>
+    <View style={tailwind.style('flex flex-col')}>
       {props.periods.map((item, index) => (
         <TouchableHighlight
           key={index}
@@ -28,9 +28,17 @@ export const PeriodTable = (props: {
             ])
           }
         >
-          <Text>{item.date.toDateString()}</Text>
+          <View style={tailwind.style('flex flex-row')}>
+            <Text style={tailwind.style('text-black')}>
+              {item.date.toDateString()}
+            </Text>
+            <Image
+              source={require('../ressources/delete.png')}
+              style={tailwind.style('ml-auto h-4 w-4')}
+            />
+          </View>
         </TouchableHighlight>
       ))}
-    </ScrollView>
+    </View>
   )
 }
