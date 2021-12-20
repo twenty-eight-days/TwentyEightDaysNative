@@ -1,19 +1,50 @@
-import tailwind from 'tailwind-react-native-classnames'
-import { ButtonImg } from '../components/buttons'
-import { exportJson } from '../../controller/share'
-import { View } from 'react-native'
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { Alert, ScrollView, Text, View } from 'react-native'
 import { RootState } from '../../controller/redux'
+import tailwind from 'tailwind-react-native-classnames'
+import { Button, ButtonImg } from '../components/buttons'
+import { exportJson } from '../../controller/share'
+import { useSelector } from 'react-redux'
+import { deleteAll, Period } from '../../model/storage'
 
 export const SettingsScreen = () => {
   const periods = useSelector((state: RootState) => state.storage.periods)
   return (
-    <View style={tailwind.style('m-10')}>
+    <ScrollView style={tailwind.style('flex flex-col mx-10')}>
+      <Export periods={periods} />
+      <DeleteAll />
+    </ScrollView>
+  )
+}
+const Export = (props: { periods: Period[] }) => {
+  return (
+    <View style={tailwind.style('')}>
+      <Text style={tailwind.style('my-5 text-xl text-black')}>Export Data</Text>
       <ButtonImg
-        onPress={() => exportJson(periods)}
+        onPress={() => exportJson(props.periods)}
         text={'Share'}
         src={require('../ressources/share.png')}
+      />
+    </View>
+  )
+}
+const DeleteAll = () => {
+  return (
+    <View style={tailwind.style()}>
+      <Text style={tailwind.style('my-5 text-xl text-black')}>
+        Delete All Data
+      </Text>
+      <Button
+        onPress={() => {
+          Alert.alert('DELETE', 'Are you sure, you want delete ?!?', [
+            { text: 'cancel' },
+            {
+              text: 'delete All',
+              onPress: () => deleteAll(),
+            },
+          ])
+        }}
+        text={'Delete'}
       />
     </View>
   )
