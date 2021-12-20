@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react'
-import { Text, View } from 'react-native'
+import { ScrollView, Text, View } from 'react-native'
 import { storage } from '../../model/storage'
 import tailwind from 'tailwind-react-native-classnames'
 import { Datepicker } from '../components/datePicker'
 import { ButtonImg } from '../components/buttons'
 import { PeriodTable } from '../components/periodTable'
 import { currentDuration, expectedDate } from '../../controller/calculate'
-import { exportJson } from '../../controller/share'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, write } from '../../controller/redux'
 
@@ -18,12 +17,14 @@ export const MainScreen = () => {
     storage.read().then(p => dispatch(write(p))) // eslint-disable-line
   }, []) // eslint-disable-line
   return (
-    <View style={tailwind.style('flex flex-col mx-10 my-10')}>
-      <View style={tailwind.style('flex flex-row flex-wrap')}>
+    <View style={tailwind.style('flex flex-col m-10 mb-32')}>
+      <View
+        style={tailwind.style(
+          'flex flex-row flex-wrap bg-pink-200 p-4 rounded-xl shadow-xl'
+        )}
+      >
         <Text style={tailwind.style('text-xl text-black')}>Expected</Text>
-        <Text
-          style={tailwind.style('text-xl text-pink-700 ml-auto font-black')}
-        >
+        <Text style={tailwind.style('text-xl text-black ml-auto font-black')}>
           {expectedDate(
             periods.length !== 0 ? periods[0].date : new Date()
           ).toDateString()}
@@ -31,9 +32,7 @@ export const MainScreen = () => {
         <Text style={tailwind.style('text-xl text-black')}>
           Current cycle day
         </Text>
-        <Text
-          style={tailwind.style('text-4xl text-pink-700 ml-auto font-black')}
-        >
+        <Text style={tailwind.style('text-4xl text-black ml-auto font-black')}>
           {currentDuration(periods.length !== 0 ? periods[0].date : new Date())}
         </Text>
       </View>
@@ -53,14 +52,9 @@ export const MainScreen = () => {
           }}
         />
       </View>
-      <View style={tailwind.style('h-3/5')}>
+      <ScrollView style={tailwind.style('h-full')}>
         <PeriodTable periods={periods} dispatch={dispatch} />
-        <ButtonImg
-          onPress={() => exportJson(periods)}
-          text={'Share'}
-          src={require('../ressources/share.png')}
-        />
-      </View>
+      </ScrollView>
     </View>
   )
 }

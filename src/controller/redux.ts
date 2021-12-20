@@ -4,7 +4,7 @@ import { Period } from '../model/storage'
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
 
-const initialState: { periods: Period[] } = {
+const initialState: { periods: { date: Date }[] } = {
   periods: [{ date: new Date() }],
 }
 export const periodSlice = createSlice({

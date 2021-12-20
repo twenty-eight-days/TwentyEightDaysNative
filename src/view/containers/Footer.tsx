@@ -4,6 +4,7 @@ import tailwind from 'tailwind-react-native-classnames'
 import { ButtonNav } from '../components/buttons'
 import { MainScreen } from './MainScreen'
 import { DataScreen } from './DataScreen'
+import { SettingsScreen } from './SettingsScreen'
 
 export const Footer = (props: { setMain: (main: JSX.Element) => void }) => {
   return (
@@ -21,6 +22,13 @@ export const Footer = (props: { setMain: (main: JSX.Element) => void }) => {
         }}
         text={'Data'}
         src={require('../ressources/table.png')}
+      />
+      <ButtonNav
+        onPress={() => {
+          props.setMain(<SettingsScreen />)
+        }}
+        text={'Settings'}
+        src={require('../ressources/settings.png')}
       />
     </View>
   )

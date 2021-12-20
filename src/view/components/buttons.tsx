@@ -10,7 +10,7 @@ export const ButtonImg = (props: {
   return (
     <TouchableHighlight
       style={tailwind.style(
-        'bg-yellow-500 rounded text-white w-32 p-2 mr-auto'
+        'bg-yellow-500 rounded text-white w-32 p-2 mr-auto shadow-xl'
       )}
       onPress={props.onPress}
     >
@@ -20,7 +20,7 @@ export const ButtonImg = (props: {
           resizeMethod={'scale'}
           source={props.src}
         />
-        <Text style={tailwind.style('m-auto text-white text-xl')}>
+        <Text style={tailwind.style('m-auto text-white text-xl shadow-xl')}>
           {props.text}
         </Text>
       </View>
@@ -54,7 +54,7 @@ export const Button = (props: { onPress: (f: any) => void; text: string }) => {
   return (
     <TouchableHighlight
       style={tailwind.style(
-        'bg-yellow-500 rounded text-white w-32 p-2 mr-auto'
+        'bg-yellow-500 rounded text-white w-32 p-2 mr-auto shadow-xl'
       )}
       onPress={props.onPress}
     >
