@@ -44,3 +44,16 @@ export function deviationDuration(periods: Period[]) {
     return deviation
   }
 }
+export function median(periods: Period[]) {
+  let duration: number[] = cycleDuration(periods)
+  let median = 0,
+    numsLen = duration.length
+  duration.sort()
+
+  if (numsLen % 2 === 0) {
+    median = (duration[numsLen / 2 - 1] + duration[numsLen / 2]) / 2
+  } else {
+    median = duration[(numsLen - 1) / 2]
+  }
+  return median
+}

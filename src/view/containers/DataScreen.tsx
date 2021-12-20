@@ -2,7 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { ScrollView, Text, View } from 'react-native'
 import { Period, storage } from '../../model/storage'
 import tailwind from 'tailwind-react-native-classnames'
-import { averageDuration, deviationDuration } from '../../controller/calculate'
+import {
+  averageDuration,
+  deviationDuration,
+  median,
+} from '../../controller/calculate'
 import { PeriodTable } from '../components/periodTable'
 import { useDispatch } from 'react-redux'
 import { Statistic } from '../components/statistic'
@@ -24,6 +28,7 @@ export const DataScreen = () => {
           data={deviationDuration(periods)}
           style={'ml-auto'}
         />
+        <Statistic title={'Median'} data={median(periods)} />
       </View>
       <View style={tailwind.style('h-full')}>
         <Text style={tailwind.style('text-xl text-black')}>Periods</Text>
