@@ -1,8 +1,8 @@
-import ReceiveSharingIntent from 'react-native-receive-sharing-intent'
 import { Period, storage } from '../model/storage'
-
 import { Alert, Share } from 'react-native'
+import ReceiveSharingIntent from 'react-native-receive-sharing-intent'
 import { store, write } from './redux'
+
 export function exportJson(periods: Period[]) {
   Share.share({ message: JSON.stringify(periods) })
 }
@@ -14,7 +14,10 @@ ReceiveSharingIntent.getReceivedFiles(
     for (const period of periods) {
       storage
         .write(period)
-        .then(p => store.dispatch(write(p)))
+        .then(p => {
+          store.dispatch(write(p))
+          Alert.alert('Import successfully')
+        })
         .catch(() => {
           Alert.alert(
             'Import Failed',
