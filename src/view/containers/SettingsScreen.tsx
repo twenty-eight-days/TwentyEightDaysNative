@@ -13,6 +13,10 @@ export const SettingsScreen = () => {
     <ScrollView style={tailwind.style('flex flex-col mx-10')}>
       <Export periods={periods} />
       <DeleteAll />
+      <Text style={tailwind.style('my-5 text-2xl text-black')}>Warning</Text>
+      <Text style={tailwind.style('my-1 text-xl text-black')}>
+        This app is not intended for contraception.
+      </Text>
     </ScrollView>
   )
 }
