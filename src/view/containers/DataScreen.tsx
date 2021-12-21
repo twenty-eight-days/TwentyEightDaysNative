@@ -22,11 +22,18 @@ export const DataScreen = () => {
   return (
     <ScrollView style={tailwind.style('flex flex-col px-10')}>
       <View style={tailwind.style('flex flex-row')}>
-        <Statistic title={'Average'} data={averageDuration(periods)} />
+        <Statistic
+          title={'Average'}
+          data={averageDuration(periods)}
+          info={
+            'In colloquial language, an average is a single number taken as representative of a non-empty list of numbers. Different concepts of average are used in different contexts. Often "average" refers to the arithmetic mean, the sum of the numbers divided by how many numbers are being averaged.'
+          }
+        />
         <Statistic
           title={'Deviation'}
           data={deviationDuration(periods)}
-          style={'ml-auto'}
+          style={'m-auto'}
+          info={'halo'}
         />
         <Statistic title={'Median'} data={median(periods)} />
       </View>
