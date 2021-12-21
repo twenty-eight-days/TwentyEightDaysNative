@@ -36,7 +36,7 @@ export const MainScreen = () => {
         />
       </View>
       <Text style={tailwind.style('text-xl text-black')}>Last Periods</Text>
-      <View style={tailwind.style('f-full')}>
+      <View style={tailwind.style('h-full')}>
         <PeriodTable periods={periods.slice(0, 4)} dispatch={dispatch} />
       </View>
     </ScrollView>

@@ -78,7 +78,7 @@ test('cycleDuration', () => {
     { date: new Date(2021, 1, 5) },
     { date: new Date(2021, 1, 1) },
   ]
-  expect(cycleDuration([]).length).toBe(0)
+  expect(cycleDuration([]).length).toBe(1)
   expect(cycleDuration(periods)[0]).toBe(4)
 })
 test('current Duration', () => {

@@ -7,12 +7,17 @@ export function currentDuration(d: Date) {
 export function expectedDate(periods: Period[]) {
   let median: number = medianDuration(periods)
   const expected = new Date()
-  expected.setDate(periods[0].date.getDate() + median)
+  if (periods.length !== 0) {
+    expected.setDate(periods[0].date.getDate() + median)
+  }
   return expected
 }
 export function cycleDuration(periods: Period[]) {
-  if (periods.length < 2) {
-    return []
+  if (periods.length === 1) {
+    return [currentDuration(periods[0].date)]
+  }
+  if (periods.length === 0) {
+    return [0]
   }
   const cycleDurations = []
   for (let i = 1; i < periods.length; i++) {
@@ -47,10 +52,9 @@ export function deviationDuration(periods: Period[]) {
 }
 export function medianDuration(periods: Period[]) {
   let duration: number[] = cycleDuration(periods)
-  let median = 0,
+  let median,
     numsLen = duration.length
   duration.sort()
-
   if (numsLen % 2 === 0) {
     median = (duration[numsLen / 2 - 1] + duration[numsLen / 2]) / 2
   } else {

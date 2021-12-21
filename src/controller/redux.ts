@@ -44,7 +44,7 @@ export const popupSlice = createSlice({
 })
 export const { write, remove } = periodSlice.actions
 export const { show, notShow, setText } = popupSlice.actions
-export default periodSlice.reducer
+//export default periodSlice.reducer
 
 export const store = configureStore({
   reducer: {
