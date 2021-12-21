@@ -26,16 +26,24 @@ export const DataScreen = () => {
           title={'Average'}
           data={averageDuration(periods)}
           info={
-            'In colloquial language, an average is a single number taken as representative of a non-empty list of numbers. Different concepts of average are used in different contexts. Often "average" refers to the arithmetic mean, the sum of the numbers divided by how many numbers are being averaged.'
+            'The average indicates the average cycle duration. It includes all cycle durations.'
           }
         />
         <Statistic
           title={'Deviation'}
           data={deviationDuration(periods)}
           style={'m-auto'}
-          info={'halo'}
+          info={
+            'The standard deviation is the average deviation from the mean value. It includes all cycle durations.'
+          }
         />
-        <Statistic title={'Median'} data={median(periods)} />
+        <Statistic
+          title={'Median'}
+          data={median(periods)}
+          info={
+            'The median is the central value of all cycle durations. It remains stable if you have very different cycle durations and is then more meaningful than the average cycle duration.'
+          }
+        />
       </View>
       <View style={tailwind.style('h-full')}>
         <Text style={tailwind.style('text-xl text-black')}>Periods</Text>
