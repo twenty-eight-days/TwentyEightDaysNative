@@ -13,7 +13,7 @@ export const Screen = () => {
   const popup = useSelector((state: RootState) => state.popup.visible)
   return (
     <SafeAreaView style={tailwind.style('text-black h-full bg-pink-50')}>
-      {!popup ? null : <Popup text={'This is a Popup'} />}
+      {!popup ? null : <Popup />}
       <StatusBar />
       <Header />
       {main}

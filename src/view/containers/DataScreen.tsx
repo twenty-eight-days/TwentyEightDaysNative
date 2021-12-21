@@ -5,7 +5,7 @@ import tailwind from 'tailwind-react-native-classnames'
 import {
   averageDuration,
   deviationDuration,
-  median,
+  medianDuration,
 } from '../../controller/calculate'
 import { PeriodTable } from '../components/periodTable'
 import { useDispatch } from 'react-redux'
@@ -39,7 +39,7 @@ export const DataScreen = () => {
         />
         <Statistic
           title={'Median'}
-          data={median(periods)}
+          data={medianDuration(periods)}
           info={
             'The median is the central value of all cycle durations. It remains stable if you have very different cycle durations and is then more meaningful than the average cycle duration.'
           }

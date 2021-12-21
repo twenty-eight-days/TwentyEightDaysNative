@@ -14,9 +14,7 @@ export const Hero = (props: { periods: Period[] }) => {
       <View style={tailwind.style('flex flex-row')}>
         <Text style={tailwind.style('text-black')}>Expected</Text>
         <Text style={tailwind.style('text-black ml-auto font-black')}>
-          {expectedDate(
-            props.periods.length !== 0 ? props.periods[0].date : new Date()
-          ).toDateString()}
+          {expectedDate(props.periods).toDateString()}
         </Text>
       </View>
       <View style={tailwind.style('flex flex-col')}>

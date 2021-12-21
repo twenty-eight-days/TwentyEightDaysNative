@@ -4,9 +4,10 @@ export function currentDuration(d: Date) {
   const day = (new Date().getTime() - d.getTime()) / (1000 * 60 * 60 * 24)
   return Math.round(day)
 }
-export function expectedDate(date: Date) {
+export function expectedDate(periods: Period[]) {
+  let median: number = medianDuration(periods)
   const expected = new Date()
-  expected.setDate(date.getDate() + 28)
+  expected.setDate(periods[0].date.getDate() + median)
   return expected
 }
 export function cycleDuration(periods: Period[]) {
@@ -44,7 +45,7 @@ export function deviationDuration(periods: Period[]) {
     return deviation
   }
 }
-export function median(periods: Period[]) {
+export function medianDuration(periods: Period[]) {
   let duration: number[] = cycleDuration(periods)
   let median = 0,
     numsLen = duration.length
