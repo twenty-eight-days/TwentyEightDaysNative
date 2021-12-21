@@ -10,6 +10,7 @@ import {
   currentDuration,
   cycleDuration,
   deviationDuration,
+  median,
 } from '../controller/calculate'
 import { Datepicker } from '../view/components/datePicker'
 import { PeriodTable } from '../view/components/periodTable'
@@ -98,6 +99,15 @@ test('test deviation Duration', () => {
     { date: new Date(2021, 1, 1) },
   ]
   expect(deviationDuration(periods)).toBe(0)
+})
+test('test Median', () => {
+  const periods: Period[] = [
+    { date: new Date(2021, 1, 16) },
+    { date: new Date(2021, 1, 10) },
+    { date: new Date(2021, 1, 5) },
+    { date: new Date(2021, 1, 1) },
+  ]
+  expect(median(periods)).toBe(5)
 })
 test('test storage read', () => {
   return storage.read().then(periods => {
