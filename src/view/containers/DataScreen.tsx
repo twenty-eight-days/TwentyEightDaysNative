@@ -48,6 +48,11 @@ export const DataScreen = () => {
             }
           />
         </View>
+        <View>
+          <Text style={tailwind.style('text-xl text-black')}>
+            Cycle Duration
+          </Text>
+        </View>
         <LineChart
           data={{
             labels: periods

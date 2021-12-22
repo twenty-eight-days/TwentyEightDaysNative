@@ -4,6 +4,11 @@ export function currentDuration(d: Date) {
   const day = (new Date().getTime() - d.getTime()) / (1000 * 60 * 60 * 24)
   return Math.round(day)
 }
+export function currentDate(periods: Period[]) {
+  const date = new Date()
+  date.setDate(periods[0].date.getDate())
+  return date
+}
 export function expectedDate(periods: Period[]) {
   let median: number = medianDuration(periods)
   const expected = new Date()
