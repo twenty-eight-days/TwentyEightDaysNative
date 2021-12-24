@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import tailwind from 'tailwind-react-native-classnames'
 
 export function Popup() {
-  const text = useSelector((state: RootState) => state.popup.popup)
+  const text = useSelector((state: RootState) => state.popup.popupMessage)
   const dispatch = useDispatch()
   return (
     <View
