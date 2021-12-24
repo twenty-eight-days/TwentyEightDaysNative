@@ -1,36 +1,22 @@
 import EncryptedStorage from 'react-native-encrypted-storage'
 
+export interface Period {
+  date: Date
+}
+// secure storage is async by nature
 export interface Storage {
   read: () => Promise<Period[]>
   write: (period: Period) => Promise<Period[]>
   delete: (period: Period) => Promise<Period[]>
+  deleteAll: () => void
 }
-
-export interface Period {
-  date: Date
+export const storage: Storage = {
+  read: getPeriod,
+  write: writePeriod,
+  delete: removePeriod,
+  deleteAll: deleteAllPeriods,
 }
-
-async function pushAsyncPeriod(newPeriod: Period) {
-  const periods = await getAsyncPeriod()
-  for (let period of periods) {
-    const date = period.date
-    const newDate = newPeriod.date
-    if (
-      date.getDate() === newDate.getDate() &&
-      date.getMonth() === newDate.getMonth() &&
-      date.getFullYear() === newDate.getFullYear()
-    ) {
-      return periods
-    }
-  }
-  periods.push(newPeriod)
-  await EncryptedStorage.setItem('period', JSON.stringify(periods)).catch(
-    (error: Error) => console.log(error)
-  )
-  return periods
-}
-
-async function getAsyncPeriod() {
+async function getPeriod() {
   const periodStorage = await EncryptedStorage.getItem('period')
   if (periodStorage === undefined || periodStorage === null) {
     await EncryptedStorage.setItem('period', '[]').catch((error: Error) =>
@@ -48,8 +34,26 @@ async function getAsyncPeriod() {
     return periods
   }
 }
-
-async function removeDate(periodToDelete: Period) {
+async function writePeriod(newPeriod: Period) {
+  const periods = await getPeriod()
+  for (let period of periods) {
+    const date = period.date
+    const newDate = newPeriod.date
+    if (
+      date.getDate() === newDate.getDate() &&
+      date.getMonth() === newDate.getMonth() &&
+      date.getFullYear() === newDate.getFullYear()
+    ) {
+      return periods
+    }
+  }
+  periods.push(newPeriod)
+  await EncryptedStorage.setItem('period', JSON.stringify(periods)).catch(
+    (error: Error) => console.log(error)
+  )
+  return await getPeriod()
+}
+async function removePeriod(periodToDelete: Period) {
   const periods = await storage.read()
   const updatedPeriods = []
   for (let period of periods) {
@@ -58,14 +62,8 @@ async function removeDate(periodToDelete: Period) {
     }
   }
   await EncryptedStorage.setItem('period', JSON.stringify(updatedPeriods))
-  return await getAsyncPeriod()
+  return await getPeriod()
 }
-
-export async function deleteAll() {
+async function deleteAllPeriods() {
   await EncryptedStorage.setItem('period', JSON.stringify([]))
-}
-export const storage: Storage = {
-  read: getAsyncPeriod,
-  write: pushAsyncPeriod,
-  delete: removeDate,
 }
