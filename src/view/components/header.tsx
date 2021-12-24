@@ -1,6 +1,6 @@
+import React from 'react'
 import { Text, View } from 'react-native'
 import tailwind from 'tailwind-react-native-classnames'
-import React from 'react'
 
 export const Header = () => {
   return (
