@@ -1,15 +1,12 @@
 import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Period } from '../model/storage'
-
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
+import { Period, storage } from '../model/storage'
 
 const initialState = {
   periods: [{ date: new Date() }],
-  visible: false,
-  popup: 'This is a Popup',
+  popupIsVisible: false,
+  popupMessage: 'This is a Popup',
 }
-export const periodSlice = createSlice({
+const periodSlice = createSlice({
   name: 'periods',
   initialState,
   reducers: {
@@ -27,28 +24,43 @@ export const periodSlice = createSlice({
     },
   },
 })
-export const popupSlice = createSlice({
+const popupSlice = createSlice({
   name: 'popup',
   initialState,
   reducers: {
     show: state => {
-      state.visible = true
+      state.popupIsVisible = true
     },
     notShow: state => {
-      state.visible = false
+      state.popupIsVisible = false
     },
     setText: (state, action: PayloadAction<string>) => {
-      state.popup = action.payload
+      state.popupMessage = action.payload
     },
   },
 })
-export const { write, remove } = periodSlice.actions
-export const { show, notShow, setText } = popupSlice.actions
-//export default periodSlice.reducer
-
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
 export const store = configureStore({
   reducer: {
     storage: periodSlice.reducer,
     popup: popupSlice.reducer,
   },
 })
+export const { show, notShow, setText } = popupSlice.actions
+
+// writing and reading to disc is async
+// redux docent support async operations inside Slice
+// they need to be performed outside of redux and written back in an async callback
+export function read() {
+  const { write } = periodSlice.actions
+  storage.read().then(p => store.dispatch(write(p)))
+}
+export function write(periods: Period) {
+  const { write } = periodSlice.actions
+  storage.write(periods).then(p => store.dispatch(write(p)))
+}
+export function remove(item: Period) {
+  const { write } = periodSlice.actions
+  storage.delete(item).then(periods => store.dispatch(write(periods)))
+}
