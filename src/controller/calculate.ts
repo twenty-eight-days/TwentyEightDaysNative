@@ -6,7 +6,9 @@ export function currentDuration(d: Date) {
 }
 export function currentDate(periods: Period[]) {
   const date = new Date()
-  date.setDate(periods[0].date.getDate())
+  if (periods.length !== 0) {
+    date.setDate(periods[0].date.getDate())
+  }
   return date
 }
 export function expectedDate(periods: Period[]) {
