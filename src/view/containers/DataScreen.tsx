@@ -1,38 +1,36 @@
 import React, { useEffect } from 'react'
-import { Dimensions, ScrollView, Text, View } from 'react-native'
-import { storage } from '../../model/storage'
+import { ScrollView, Text, View } from 'react-native'
+import { RootState, read } from '../../controller/redux'
 import tailwind from 'tailwind-react-native-classnames'
 import {
   averageDuration,
-  cycleDuration,
   deviationDuration,
   medianDuration,
 } from '../../controller/calculate'
 import { PeriodTable } from '../components/periodTable'
-import { useDispatch, useSelector } from 'react-redux'
-import { Statistic } from '../components/statistic'
-import { LineChart } from 'react-native-chart-kit'
-import { RootState, write } from '../../controller/redux'
+import { useSelector } from 'react-redux'
+import { DayCircle, PeriodsChart } from '../components/statistic'
 
 export const DataScreen = () => {
   const periods = useSelector((state: RootState) => state.storage.periods)
-  const dispatch = useDispatch()
+  // eslint is disabled because useEffects needs to only run once and eslint
+  // doesn't compile the code with useEffect(()=>{},[])
   useEffect(() => {
     // eslint-disable-line
-    storage.read().then(p => dispatch(write(p))) // eslint-disable-line
+    read() // eslint-disable-line
   }, []) // eslint-disable-line
   if (periods.length > 0) {
     return (
       <ScrollView style={tailwind.style('flex flex-col px-10')}>
         <View style={tailwind.style('flex flex-row')}>
-          <Statistic
+          <DayCircle
             title={'Average'}
             data={averageDuration(periods)}
             info={
               'The average indicates the average cycle duration. It includes all cycle durations.'
             }
           />
-          <Statistic
+          <DayCircle
             title={'Deviation'}
             data={deviationDuration(periods)}
             style={'m-auto'}
@@ -40,7 +38,7 @@ export const DataScreen = () => {
               'The standard deviation is the average deviation from the mean value. It includes all cycle durations.'
             }
           />
-          <Statistic
+          <DayCircle
             title={'Median'}
             data={medianDuration(periods)}
             info={
@@ -48,50 +46,10 @@ export const DataScreen = () => {
             }
           />
         </View>
-        <View>
-          <Text style={tailwind.style('text-xl text-black')}>
-            Cycle Duration
-          </Text>
-        </View>
-        <LineChart
-          data={{
-            labels: periods
-              .map(p => p.date.toDateString().split(' ').splice(1, 2).join(' '))
-              .splice(0, 5),
-            datasets: [{ data: cycleDuration(periods).splice(0, 5) }],
-          }}
-          width={Dimensions.get('window').width * 0.8}
-          height={220}
-          //fromZero={true}
-          yAxisLabel=""
-          yAxisSuffix="days"
-          yAxisInterval={1} // optional, defaults to 1
-          chartConfig={{
-            decimalPlaces: 0,
-            backgroundColor: '#f39d0b',
-            backgroundGradientFrom: '#d75987',
-            backgroundGradientTo: '#f39d0b',
-            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-            labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-            style: {
-              borderRadius: 16,
-            },
-            propsForDots: {
-              r: '6',
-              strokeWidth: '2',
-              stroke: '#ffa726',
-            },
-          }}
-          bezier
-          style={{
-            marginVertical: 8,
-            borderRadius: 16,
-          }}
-        />
-        <View style={tailwind.style('h-full')}>
-          <Text style={tailwind.style('text-xl text-black')}>Periods</Text>
-          <PeriodTable periods={periods} dispatch={dispatch} />
-        </View>
+        <Text style={tailwind.style('text-xl text-black')}>Cycle Duration</Text>
+        <PeriodsChart periods={periods} />
+        <Text style={tailwind.style('text-xl text-black')}>Periods</Text>
+        <PeriodTable periods={periods} />
       </ScrollView>
     )
   } else {
