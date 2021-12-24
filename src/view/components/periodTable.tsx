@@ -1,13 +1,10 @@
 import React from 'react'
+import { Period } from '../../model/storage'
 import { Text, TouchableHighlight, Alert, Image, View } from 'react-native'
 import tailwind from 'tailwind-react-native-classnames'
-import { write } from '../../controller/redux'
-import { Period, storage } from '../../model/storage'
+import { remove } from '../../controller/redux'
 
-export const PeriodTable = (props: {
-  periods: Period[]
-  dispatch: (f: any) => void
-}) => {
+export const PeriodTable = (props: { periods: Period[] }) => {
   return (
     <View style={tailwind.style('flex flex-col')}>
       {props.periods.map((item, index) => (
@@ -20,9 +17,7 @@ export const PeriodTable = (props: {
               {
                 text: 'ok',
                 onPress: () => {
-                  storage
-                    .delete(item)
-                    .then(periods => props.dispatch(write(periods)))
+                  remove(item)
                 },
               },
             ])
