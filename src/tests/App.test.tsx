@@ -3,7 +3,7 @@ import React from 'react'
 import renderer from 'react-test-renderer'
 import { render, waitFor, fireEvent } from 'react-native-testing-library'
 import { App } from '../App'
-import { Button, ButtonImg } from '../view/components/buttons'
+import { Button, ButtonImg, Datepicker } from '../view/components/buttons'
 import { Period, storage } from '../model/storage'
 import {
   averageDuration,
@@ -12,10 +12,9 @@ import {
   deviationDuration,
   medianDuration,
 } from '../controller/calculate'
-import { Datepicker } from '../view/components/datePicker'
 import { PeriodTable } from '../view/components/periodTable'
 import { DataScreen } from '../view/containers/DataScreen'
-import { Footer } from '../view/containers/Footer'
+import { Footer } from '../view/components/footer'
 import { store } from '../controller/redux'
 import { Provider } from 'react-redux'
 
@@ -67,8 +66,7 @@ test('test Period Table', async () => {
     { date: new Date(2021, 1, 1) },
   ]
   const { getByText } = await waitFor(() => {
-    const dispatch = store.dispatch
-    return render(<PeriodTable periods={periods} dispatch={dispatch} />)
+    return render(<PeriodTable periods={periods} />)
   })
   const periodItem = getByText('Mon Feb 01 2021')
   fireEvent.press(periodItem)
@@ -117,7 +115,7 @@ test('test storage read', () => {
 test('test storage write', () => {
   const date = new Date(2021, 1, 10)
   return storage.write({ date: date }).then(periods => {
-    expect(periods.length).toBe(3)
+    expect(periods.length).toBe(2)
   })
 })
 test('test storage write duplicate', () => {
